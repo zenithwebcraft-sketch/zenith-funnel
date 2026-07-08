@@ -8,6 +8,9 @@ const Proposal = () => {
   const defaultName = language === 'es' ? "tu negocio" : "Your Business";
   const name = searchParams.get("name") || defaultName;
 
+  const oneTimeText = language === 'es' ? "pago único" : "one-time payment";
+  const includesText = language === 'es' ? "Este plan incluye:" : "This plan includes:";
+
   const scrollToPricing = () => {
     document.getElementById('pricing-section')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -88,7 +91,7 @@ const Proposal = () => {
                   ) : (
                     <div className="flex items-baseline text-white">
                       <span className="text-5xl font-semibold tracking-tight">{plan.data.setup.split(' ')[0]}</span>
-                      <span className="text-gray-400 text-sm ml-2">pago único</span>
+                      <span className="text-gray-400 text-sm ml-2">{oneTimeText}</span>
                     </div>
                   )}
                 </div>
@@ -114,7 +117,7 @@ const Proposal = () => {
                 <hr className="border-gray-800 mb-6" />
 
                 {/* Lista de Features */}
-                <p className="text-white text-sm font-medium mb-4">Este plan incluye:</p>
+                <p className="text-white text-sm font-medium mb-4">{includesText}</p>
                 <ul className="flex-grow space-y-4 text-sm text-gray-300">
                   {plan.data.features.map((feature: string, fIdx: number) => (
                     <li key={fIdx} className="flex items-start">
