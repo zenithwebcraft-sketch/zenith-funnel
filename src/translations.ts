@@ -25,6 +25,11 @@ export const translations = {
       badge3: "7 Días",
       badge3Text: "Garantía de Devolución"
     },
+
+    proposal: {
+      title: "¡Felicidades, {name}! Tu sitio web está listo para pasar a tus manos.",
+      slugNote: "(Slug detectado para PayPal: {slug})"
+    },
     
     // Content Section
     content: {
@@ -293,6 +298,11 @@ export const translations = {
       badge2Text: "Responsive Design",
       badge3: "7 Days",
       badge3Text: "Money-Back Guarantee"
+    },
+    
+    proposal: {
+      title: "Congratulations, {name}! Your website is ready to be handed over.",
+      slugNote: "(Detected slug for PayPal: {slug})"
     },
     
     // Content Section

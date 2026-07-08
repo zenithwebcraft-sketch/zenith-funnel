@@ -1,18 +1,23 @@
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "../translations";
 
 const Proposal = () => {
   const [searchParams] = useSearchParams();
+  const { t, language } = useTranslation();
   
-  const name = searchParams.get("name") || "Your Business";
+  // Asignamos un valor por defecto que respete el idioma activo si no viene el parámetro 'name'
+  const defaultName = language === 'es' ? "tu negocio" : "Your Business";
+  
+  const name = searchParams.get("name") || defaultName;
   const slug = searchParams.get("slug") || "";
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <h1 className="text-4xl font-bold text-center mb-4">
-        Congratulations, {name}! Your website is ready to be handed over.
+        {t.proposal.title.replace('{name}', name)}
       </h1>
       <p className="text-gray-500">
-        (Detected slug for PayPal: {slug})
+        {t.proposal.slugNote.replace('{slug}', slug)}
       </p>
     </div>
   );
