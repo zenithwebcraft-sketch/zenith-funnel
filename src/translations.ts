@@ -26,9 +26,119 @@ export const translations = {
       badge3Text: "Garantía de Devolución"
     },
 
-    proposal: {
-      title: "¡Felicidades, {name}! Tu sitio web está listo para pasar a tus manos.",
-      slugNote: "(Slug detectado para PayPal: {slug})"
+proposal: {
+      hero: {
+        title: "{name}, haz que tu nueva página empiece a traer citas reales",
+        subtitle: "Te mostramos tu web de prueba. Ahora elige el plan que mejor se adapta a tu negocio y nosotros nos encargamos del resto.",
+        trust: "Diseñado para pequeños negocios locales que quieren resultados sin pelear con la tecnología.",
+        cta: "Elegir mi plan"
+      },
+      pricing: {
+        tier0: {
+          name: "Plain",
+          setup: "US$150 pago único",
+          monthly: null,
+          delivery: "Entrega en 48 horas hábiles",
+          features: [
+            "Página base de 3–4 secciones (Inicio, Servicios, Contacto, Galería).",
+            "Sin dominio propio ni hosting incluidos.",
+            "Ideal si ya tienes proveedor técnico o quieres sólo el diseño."
+          ],
+          cta: "Elegir este plan"
+        },
+        tier1: {
+          name: "Presencia Web",
+          setup: "US$200 setup",
+          monthly: "US$39 / mes (primer año)",
+          delivery: "Entrega en 72 horas hábiles",
+          features: [
+            "Web completa con dominio y hosting configurados por nosotros.",
+            "Incluye cambios pequeños mensuales (texto, fotos, horarios).",
+            "Pensado para negocios que necesitan estar bien presentados en Google y redes."
+          ],
+          cta: "Elegir Presencia Web"
+        },
+        tier2: {
+          name: "Web + Citas",
+          badge: "Más elegido",
+          setup: "US$400 setup",
+          monthly: "US$79 / mes (primer año)",
+          delivery: "Entrega en 7 días hábiles",
+          features: [
+            "Todo lo del plan Presencia Web.",
+            "Sistema de reservas online integrado con Google Calendar.",
+            "Configuramos tus servicios, horarios y profesional(es) para evitar doble reservas.",
+            "Menos llamadas al teléfono, más citas confirmadas automáticamente."
+          ],
+          cta: "Elegir Web + Citas"
+        },
+        tier3: {
+          name: "Crecimiento Local",
+          setup: "US$600 setup",
+          monthly: "US$119 / mes (primer año)",
+          delivery: "Entrega en 15 días hábiles",
+          features: [
+            "Todo lo del plan Web + Citas.",
+            "Blog y publicaciones mensuales (promos, novedades, consejos).",
+            "Actualización frecuente de contenido para mejorar tu visibilidad local.",
+            "Soporte prioritario en cambios y ajustes."
+          ],
+          cta: "Elegir Crecimiento"
+        }
+      },
+      comparison: {
+        title: "¿Por qué no es otra web más de agencia ni otro “hazlo tú mismo”?",
+        agency: {
+          title: "Agencia tradicional",
+          points: [
+            "Cobros únicos de US$1,000–US$5,000 por una web que luego casi nadie actualiza.",
+            "Meses de espera y múltiples reuniones."
+          ]
+        },
+        diy: {
+          title: "Constructores DIY (Wix, etc.)",
+          points: [
+            "US$16–US$100 al mes cuando sumas extras, y tú tienes que construir todo."
+          ]
+        },
+        zenith: {
+          title: "ZenithWebCraft",
+          points: [
+            "Planes desde US$39 al mes con nosotros encargándonos de la parte técnica y de las reservas.",
+            "Entrega rápida y mantenimiento mensual incluido para que tu web no se quede vieja."
+          ]
+        }
+      },
+      faq: {
+        title: "Preguntas Frecuentes",
+        items: [
+          {
+            q: "¿Qué diferencia hay entre cada plan?",
+            a: "Plain = sólo página, sin dominio/hosting. Presencia Web = web + dominio/hosting + cambios pequeños. Web + Citas = lo anterior + sistema de reservas online. Crecimiento = Web + Citas + blog y contenido recurrente."
+          },
+          {
+            q: "¿El precio mensual es siempre el mismo?",
+            a: "El precio mensual mostrado (39 / 79 / 119) aplica durante el primer año de servicio e incluye configuración inicial, hosting y dominio promocional. A partir del segundo año, se aplica la tarifa estándar (59 / 79 / 179 al mes)."
+          },
+          {
+            q: "¿Qué incluye exactamente la mensualidad?",
+            a: "Incluye el hosting del sitio, mantenimiento técnico básico, cambios pequeños mensuales (texto, fotos, horarios) y soporte sobre el sistema de citas en los planes que lo incluyen. No cobramos extra por visitas al sitio ni por citas normales dentro del uso razonable del negocio."
+          },
+          {
+            q: "¿Cuánto tarda en estar lista mi página?",
+            a: "Plain se entrega en 48 horas hábiles, Presencia en 72 horas hábiles, Web + Citas en 7 días hábiles y Crecimiento en 15 días hábiles."
+          },
+          {
+            q: "¿Puedo cancelar el servicio?",
+            a: "Los planes con mensualidad tienen duración mínima de 12 meses. Después se renuevan anualmente y puedes cancelar avisando con 30 días de anticipación antes de la fecha de renovación."
+          },
+          {
+            q: "¿Soy dueño de mi dominio y de mi contenido?",
+            a: "Sí. El dominio y el contenido del sitio se registran a tu nombre o al del negocio. Si en algún momento decides cambiar de proveedor, puedes llevarte tu dominio y la copia del contenido."
+          }
+        ]
+      },
+      terms: "Los precios indicados son en USD. Planes con mensualidad: compromiso mínimo 12 meses. La tarifa mensual promocional (39 / 79 / 119) aplica durante el primer año, luego se actualiza a 59 / 79 / 179 salvo acuerdo distinto por escrito. La renovación es anual con aviso de cancelación con 30 días de antelación."
     },
     
     // Content Section
@@ -301,10 +411,120 @@ export const translations = {
     },
     
     proposal: {
-      title: "Congratulations, {name}! Your website is ready to be handed over.",
-      slugNote: "(Detected slug for PayPal: {slug})"
+      hero: {
+        title: "{name}, start getting real appointments with your new website",
+        subtitle: "We showed you your test website. Now choose the plan that best fits your business and we'll take care of the rest.",
+        trust: "Designed for local small businesses that want results without fighting with technology.",
+        cta: "Choose my plan"
+      },
+      pricing: {
+        tier0: {
+          name: "Plain",
+          setup: "US$150 one-time payment",
+          monthly: null,
+          delivery: "Delivery in 48 business hours",
+          features: [
+            "Basic 3–4 section page (Home, Services, Contact, Gallery).",
+            "No custom domain or hosting included.",
+            "Ideal if you already have a technical provider or just want the design."
+          ],
+          cta: "Choose this plan"
+        },
+        tier1: {
+          name: "Web Presence",
+          setup: "US$200 setup",
+          monthly: "US$39 / mo (first year)",
+          delivery: "Delivery in 72 business hours",
+          features: [
+            "Complete website with domain and hosting configured by us.",
+            "Includes small monthly changes (text, photos, hours).",
+            "Designed for businesses that need to look great on Google and social media."
+          ],
+          cta: "Choose Web Presence"
+        },
+        tier2: {
+          name: "Web + Appointments",
+          badge: "Most popular",
+          setup: "US$400 setup",
+          monthly: "US$79 / mo (first year)",
+          delivery: "Delivery in 7 business days",
+          features: [
+            "Everything in Web Presence.",
+            "Online booking system integrated with Google Calendar.",
+            "We set up your services, hours, and staff to prevent double booking.",
+            "Fewer phone calls, more automatically confirmed appointments."
+          ],
+          cta: "Choose Web + Appointments"
+        },
+        tier3: {
+          name: "Local Growth",
+          setup: "US$600 setup",
+          monthly: "US$119 / mo (first year)",
+          delivery: "Delivery in 15 business days",
+          features: [
+            "Everything in Web + Appointments.",
+            "Blog and monthly posts (promos, updates, tips).",
+            "Frequent content updates to improve your local visibility.",
+            "Priority support for changes and adjustments."
+          ],
+          cta: "Choose Growth"
+        }
+      },
+      comparison: {
+        title: "Why isn't this just another agency website or a DIY builder?",
+        agency: {
+          title: "Traditional Agency",
+          points: [
+            "One-time fees of US$1,000–US$5,000 for a website that rarely gets updated.",
+            "Months of waiting and multiple meetings."
+          ]
+        },
+        diy: {
+          title: "DIY Builders (Wix, etc.)",
+          points: [
+            "US$16–US$100 a month when you add extras, and you have to build it all yourself."
+          ]
+        },
+        zenith: {
+          title: "ZenithWebCraft",
+          points: [
+            "Plans starting at US$39/mo with us handling the tech and bookings.",
+            "Fast delivery and monthly maintenance included so your site never gets outdated."
+          ]
+        }
+      },
+      faq: {
+        title: "Frequently Asked Questions",
+        items: [
+          {
+            q: "What's the difference between each plan?",
+            a: "Plain = just the page, no domain/hosting. Web Presence = web + domain/hosting + minor changes. Web + Appointments = the above + online booking system. Growth = Web + Appointments + blog and recurring content."
+          },
+          {
+            q: "Is the monthly price always the same?",
+            a: "The monthly price shown (39 / 79 / 119) applies during the first year of service and includes initial setup, hosting, and promotional domain. Starting the second year, the standard rate applies (59 / 79 / 179 per month)."
+          },
+          {
+            q: "What exactly does the monthly fee include?",
+            a: "It includes website hosting, basic technical maintenance, small monthly updates (text, photos, hours), and support for the booking system on plans that include it. We do not charge extra for website traffic or normal appointment volume within reasonable business use."
+          },
+          {
+            q: "How long does it take for my page to be ready?",
+            a: "Plain is delivered in 48 business hours, Presence in 72 business hours, Web + Appointments in 7 business days, and Growth in 15 business days."
+          },
+          {
+            q: "Can I cancel the service?",
+            a: "Plans with a monthly fee have a 12-month minimum commitment. After that, they renew annually and you can cancel by notifying us 30 days prior to the renewal date."
+          },
+          {
+            q: "Do I own my domain and content?",
+            a: "Yes. The domain and website content are registered in your name or your business's name. If you ever decide to change providers, you can take your domain and a copy of the content with you."
+          }
+        ]
+      },
+      terms: "Prices shown are in USD. Plans with a monthly fee: minimum 12-month commitment. The promotional monthly rate (39 / 79 / 119) applies during the first year, then updates to 59 / 79 / 179 unless otherwise agreed in writing. Renewal is annual with a 30-day cancellation notice."
     },
-    
+
     // Content Section
     content: {
       title1: "WHAT'S INCLUDED IN YOUR",
