@@ -1,12 +1,20 @@
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "../translations";
+import PayPalCheckout from "../components/ui/PayPalCheckout";
 
 const Proposal = () => {
   const [searchParams] = useSearchParams();
   const { t, language } = useTranslation();
   
+  // Estado para controlar qué plan tiene el botón de PayPal activo
+  const [activePlan, setActivePlan] = useState<string | null>(null);
+  
   const defaultName = language === 'es' ? "tu negocio" : "Your Business";
   const name = searchParams.get("name") || defaultName;
+  
+  // Capturamos el slug y le damos un valor por defecto seguro por si alguien entra directo
+  const slug = searchParams.get("slug") || "demo-slug";
 
   const oneTimeText = language === 'es' ? "pago único" : "one-time payment";
   const includesText = language === 'es' ? "Este plan incluye:" : "This plan includes:";
@@ -26,6 +34,34 @@ const Proposal = () => {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
     </svg>
   );
+
+  // Configuración centralizada de los planes y sus IDs de PayPal
+  const pricingPlans = [
+    { 
+      id: 'tier0', 
+      data: t.proposal.pricing.tier0, 
+      highlight: false, 
+      paypal: { type: 'onetime' as const, amount: 150 } 
+    },
+    { 
+      id: 'tier1', 
+      data: t.proposal.pricing.tier1, 
+      highlight: false, 
+      paypal: { type: 'subscription' as const, planId: 'P-6J804347GG107570BNJHK2OY' } 
+    },
+    { 
+      id: 'tier2', 
+      data: t.proposal.pricing.tier2, 
+      highlight: true, 
+      paypal: { type: 'subscription' as const, planId: 'P-4SL96260NA557872ENJHK3FI' } 
+    },
+    { 
+      id: 'tier3', 
+      data: t.proposal.pricing.tier3, 
+      highlight: false, 
+      paypal: { type: 'subscription' as const, planId: 'P-27Y759067K880990ANJHK3VI' } 
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
@@ -49,17 +85,12 @@ const Proposal = () => {
         </p>
       </section>
 
-      {/* 2. PRICING SECTION (Estilo n8n Oscuro) */}
+      {/* 2. PRICING SECTION (Estilo n8n Oscuro con PayPal Dinámico) */}
       <section id="pricing-section" className="px-4 py-24 bg-[#0B0B0F]">
         <div className="max-w-[1400px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
             
-            {[
-              { id: 'tier0', data: t.proposal.pricing.tier0, highlight: false },
-              { id: 'tier1', data: t.proposal.pricing.tier1, highlight: false },
-              { id: 'tier2', data: t.proposal.pricing.tier2, highlight: true },
-              { id: 'tier3', data: t.proposal.pricing.tier3, highlight: false },
-            ].map((plan) => (
+            {pricingPlans.map((plan) => (
               <div 
                 key={plan.id} 
                 className={`relative flex flex-col p-8 text-left rounded-2xl transition-all h-full ${
@@ -68,7 +99,6 @@ const Proposal = () => {
                     : 'bg-[#16161A] border border-gray-800'
                 }`}
               >
-                {/* Badge Recomendado */}
                 {plan.highlight && (
                   <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <span className="bg-indigo-600 text-white text-xs font-bold uppercase tracking-wider py-1.5 px-4 rounded-full">
@@ -77,11 +107,9 @@ const Proposal = () => {
                   </div>
                 )}
                 
-                {/* Cabecera del Plan */}
                 <h3 className="text-2xl font-medium text-white mb-2 tracking-tight">{plan.data.name}</h3>
                 <p className="text-gray-400 text-sm mb-6 h-5">{plan.data.setup}</p>
                 
-                {/* Precio Mensual (o setup si no hay mensual) */}
                 <div className="min-h-[70px] mb-6">
                   {plan.data.monthly ? (
                     <div className="flex items-baseline text-white">
@@ -96,7 +124,6 @@ const Proposal = () => {
                   )}
                 </div>
 
-                {/* Caja Métrica (Estilo "Workflow executions") */}
                 <div className="bg-[#23232B] border border-gray-700/50 rounded-xl p-4 mb-6 flex justify-between items-center">
                   <div>
                     <p className="text-white font-medium text-sm">{plan.data.delivery.split(' ')[0]} {plan.data.delivery.split(' ')[1]}</p>
@@ -105,18 +132,31 @@ const Proposal = () => {
                   <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
 
-                {/* Botón CTA */}
-                <button className={`w-full py-3 px-4 rounded-lg font-medium text-sm transition-all mb-8 ${
-                  plan.highlight 
-                    ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500' 
-                    : 'bg-[#4B4BFA] text-white hover:bg-[#5C5CFA]'
-                }`}>
-                  {plan.data.cta}
-                </button>
+                {/* --- LÓGICA DE RENDERIZADO DEL BOTÓN --- */}
+                <div className="mb-8 min-h-[45px]">
+                  {activePlan === plan.id ? (
+                    <PayPalCheckout 
+                      type={plan.paypal.type}
+                      amount={plan.paypal.amount}
+                      planId={plan.paypal.planId}
+                      slug={slug}
+                    />
+                  ) : (
+                    <button 
+                      onClick={() => setActivePlan(plan.id)}
+                      className={`w-full py-3 px-4 rounded-lg font-medium text-sm transition-all ${
+                        plan.highlight 
+                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500' 
+                          : 'bg-[#4B4BFA] text-white hover:bg-[#5C5CFA]'
+                      }`}
+                    >
+                      {plan.data.cta}
+                    </button>
+                  )}
+                </div>
 
                 <hr className="border-gray-800 mb-6" />
 
-                {/* Lista de Features */}
                 <p className="text-white text-sm font-medium mb-4">{includesText}</p>
                 <ul className="flex-grow space-y-4 text-sm text-gray-300">
                   {plan.data.features.map((feature: string, fIdx: number) => (
@@ -138,7 +178,6 @@ const Proposal = () => {
           <h2 className="text-3xl font-bold mb-12 text-gray-900">{t.proposal.comparison.title}</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-            {/* Agencia */}
             <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
               <h3 className="font-bold text-xl mb-6 text-gray-400">{t.proposal.comparison.agency.title}</h3>
               <ul className="space-y-4 text-sm text-gray-500">
@@ -148,7 +187,6 @@ const Proposal = () => {
               </ul>
             </div>
             
-            {/* DIY */}
             <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm">
               <h3 className="font-bold text-xl mb-6 text-gray-400">{t.proposal.comparison.diy.title}</h3>
               <ul className="space-y-4 text-sm text-gray-500">
@@ -158,7 +196,6 @@ const Proposal = () => {
               </ul>
             </div>
 
-            {/* Zenith */}
             <div className="bg-blue-600 p-8 rounded-2xl shadow-xl text-white transform md:scale-105 z-10">
               <h3 className="font-bold text-xl mb-6">{t.proposal.comparison.zenith.title}</h3>
               <ul className="space-y-4 text-sm text-blue-50">
