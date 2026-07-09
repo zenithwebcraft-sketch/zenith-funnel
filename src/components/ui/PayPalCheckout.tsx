@@ -1,18 +1,18 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // ← Importamos el hook de navegación
 
 interface Props {
   type: 'onetime' | 'subscription';
-  amount?: number; // Solo se usará para el plan Plain
-  planId?: string; // Solo se usará para Presencia, Web+Citas y Crecimiento
-  slug: string;    // El ID del negocio que nos llega por la URL
+  amount?: number; 
+  planId?: string; 
+  slug: string;    
 }
 
 export default function PayPalCheckout({ type, amount, planId, slug }: Props) {
   const [error, setError] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate(); // ← Inicializamos la navegación
 
-  // Configuración dinámica del SDK según el tipo de plan
   const initialOptions = {
     clientId: import.meta.env.VITE_PAYPAL_CLIENT_ID,
     currency: "USD",
@@ -20,38 +20,29 @@ export default function PayPalCheckout({ type, amount, planId, slug }: Props) {
     vault: type === 'subscription' ? true : false,
   };
 
-  if (isSuccess) {
-    return (
-      <div className="bg-[#1C1C24] border border-indigo-500/50 text-indigo-400 p-4 rounded-lg text-center animate-fade-in w-full mt-4">
-        <h4 className="font-bold mb-1">¡Pago Procesado!</h4>
-        <p className="text-xs text-gray-400">Un ingeniero técnico se pondrá en contacto contigo.</p>
-      </div>
-    );
-  }
-
   return (
     <PayPalScriptProvider options={initialOptions}>
       <div className="w-full mt-4 animate-fade-in">
         {type === 'subscription' ? (
-          /* --- LÓGICA PARA SUSCRIPCIONES (Tier 1, 2 y 3) --- */
+          /* --- LÓGICA PARA SUSCRIPCIONES --- */
           <PayPalButtons
             style={{ layout: "vertical", color: "blue", shape: "rect", label: "subscribe", height: 45 }}
             createSubscription={(data, actions) => {
               setError("");
               return actions.subscription.create({
                 plan_id: planId!,
-                custom_id: slug, // AQUÍ inyectamos el rastro para n8n
+                custom_id: slug,
               });
             }}
             onApprove={async (data, actions) => {
-              // El setup fee y la suscripción fueron aprobados
-              setIsSuccess(true);
+              // Pago recurrente exitoso: Redirigimos a la página de gracias
+              navigate('/ThankYou');
             }}
             onError={() => setError("Ocurrió un error. Intenta con otra tarjeta.")}
             onCancel={() => setError("Pago cancelado.")}
           />
         ) : (
-          /* --- LÓGICA PARA PAGO ÚNICO (Plan Plain) --- */
+          /* --- LÓGICA PARA PAGO ÚNICO --- */
           <PayPalButtons
             style={{ layout: "vertical", color: "blue", shape: "rect", label: "pay", height: 45 }}
             createOrder={(data, actions) => {
@@ -60,14 +51,15 @@ export default function PayPalCheckout({ type, amount, planId, slug }: Props) {
                 purchase_units: [
                   {
                     amount: { value: amount!.toString() },
-                    custom_id: slug, // AQUÍ inyectamos el rastro para n8n
+                    custom_id: slug, 
                   },
                 ],
               });
             }}
             onApprove={async (data, actions) => {
               return actions.order!.capture().then((details) => {
-                setIsSuccess(true);
+                // Pago único exitoso: Redirigimos a la página de gracias
+                navigate('/ThankYou');
               });
             }}
             onError={() => setError("Ocurrió un error. Intenta con otra tarjeta.")}
