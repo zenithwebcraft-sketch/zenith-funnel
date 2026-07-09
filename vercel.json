@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/t/:slug",
+      "destination": "https://zenithwebcraft.app.n8n.cloud/webhook/r?slug=:slug"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
