@@ -33,6 +33,13 @@ proposal: {
         trust: "Diseñado para pequeños negocios locales que quieren resultados sin pelear con la tecnología.",
         cta: "Elegir mi plan"
       },
+      missingSlug: {
+        title: "Falta tu código de acceso",
+        description: "Para ver tu propuesta personalizada y la vista previa de tu web, por favor escanea el código QR que vino impreso en tu tarjeta postal.",
+        contact: "¿Necesitas ayuda? Contáctanos:",
+        email: "contact@zenithwebcraft.com", // Cambia esto por tu email real
+        phone: "+1 (317) 744-3712" // Cambia esto por tu teléfono real
+      },
       pricing: {
         tier0: {
           name: "Plain",
@@ -416,6 +423,13 @@ proposal: {
         subtitle: "We showed you your test website. Now choose the plan that best fits your business and we'll take care of the rest.",
         trust: "Designed for local small businesses that want results without fighting with technology.",
         cta: "Choose my plan"
+      },
+      missingSlug: {
+        title: "Access Code Missing",
+        description: "To view your personalized proposal and website preview, please scan the QR code printed on your postcard.",
+        contact: "Need help? Contact us:",
+        email: "contact@zenithwebcraft.com", // Cambia esto por tu email real
+        phone: "+1 (317) 744-3712" // Cambia esto por tu teléfono real
       },
       pricing: {
         tier0: {
