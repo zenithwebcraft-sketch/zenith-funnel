@@ -38,7 +38,7 @@ proposal: {
         description: "Para ver tu propuesta personalizada y la vista previa de tu web, por favor escanea el código QR que vino impreso en tu tarjeta postal.",
         contact: "¿Necesitas ayuda? Contáctanos:",
         email: "contact@zenithwebcraft.com", // Cambia esto por tu email real
-        phone: "+1 (317) 744-3712" // Cambia esto por tu teléfono real
+        phone: "+1 (689) 315-0792" // Cambia esto por tu teléfono real
       },
       pricing: {
         tier0: {
@@ -429,7 +429,7 @@ proposal: {
         description: "To view your personalized proposal and website preview, please scan the QR code printed on your postcard.",
         contact: "Need help? Contact us:",
         email: "contact@zenithwebcraft.com", // Cambia esto por tu email real
-        phone: "+1 (317) 744-3712" // Cambia esto por tu teléfono real
+        phone: "+1 (689) 315-0792" // Cambia esto por tu teléfono real
       },
       pricing: {
         tier0: {
