@@ -13,8 +13,8 @@ const Proposal = () => {
   const defaultName = language === 'es' ? "tu negocio" : "Your Business";
   const name = searchParams.get("name") || defaultName;
   
-  // Capturamos el slug y le damos un valor por defecto seguro por si alguien entra directo
-  const slug = searchParams.get("slug") || "demo-slug";
+// 1. QUITAMOS el "demo-slug" por defecto para que sea null si no viene
+  const slug = searchParams.get("slug");
 
   const oneTimeText = language === 'es' ? "pago único" : "one-time payment";
   const includesText = language === 'es' ? "Este plan incluye:" : "This plan includes:";
@@ -62,7 +62,35 @@ const Proposal = () => {
       paypal: { type: 'subscription' as const, planId: 'P-27Y759067K880990ANJHK3VI' } 
     },
   ];
-
+if (!slug) {
+    return (
+      <div className="min-h-screen bg-[#0B0B0F] flex flex-col items-center justify-center p-6 text-center text-white font-sans">
+        <div className="max-w-md bg-[#16161A] border border-gray-800 p-8 rounded-2xl shadow-2xl">
+          <div className="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm14 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path>
+            </svg>
+          </div>
+          <h1 className="text-2xl font-bold mb-4">{t.proposal.missingSlug.title}</h1>
+          <p className="text-gray-400 mb-8 leading-relaxed">
+            {t.proposal.missingSlug.description}
+          </p>
+          
+          <hr className="border-gray-800 mb-6" />
+          
+          <p className="text-sm font-medium text-gray-300 mb-4">{t.proposal.missingSlug.contact}</p>
+          <div className="flex flex-col space-y-2 text-sm text-gray-500">
+            <a href={`mailto:${t.proposal.missingSlug.email}`} className="hover:text-blue-400 transition-colors">
+              ✉️ {t.proposal.missingSlug.email}
+            </a>
+            <a href={`tel:${t.proposal.missingSlug.phone}`} className="hover:text-blue-400 transition-colors">
+              📞 {t.proposal.missingSlug.phone}
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
       
