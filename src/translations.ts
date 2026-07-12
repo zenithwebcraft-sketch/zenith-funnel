@@ -29,7 +29,7 @@ export const translations = {
 proposal: {
       hero: {
         title: "{name}, haz que tu nueva página empiece a traer citas reales",
-        subtitle: "Te mostramos tu web de prueba. Ahora elige el plan que mejor se adapta a tu negocio y nosotros nos encargamos del resto.",
+        subtitle: "Te mostramos tu web de prueba (100% personalizable con tus colores). Ahora elige el plan que mejor se adapta a tu negocio y nosotros nos encargamos del resto.",
         trust: "Diseñado para pequeños negocios locales que quieren resultados sin pelear con la tecnología.",
         cta: "Elegir mi plan"
       },
@@ -119,6 +119,10 @@ proposal: {
       faq: {
         title: "Preguntas Frecuentes",
         items: [
+          {
+            q: "¿Puedo modificar los colores o el estilo de la página?",
+            a: "¡Por supuesto! Tu página es 100% personalizable. Una vez que elijas tu plan, adaptaremos los colores, la tipografía y el estilo general para que coincidan perfectamente con el logotipo y la identidad visual de tu negocio."
+          },
           {
             q: "¿Qué diferencia hay entre cada plan?",
             a: "Plain = sólo página, sin dominio/hosting. Presencia Web = web + dominio/hosting + cambios pequeños. Web + Citas = lo anterior + sistema de reservas online. Crecimiento = Web + Citas + blog y contenido recurrente."
@@ -420,7 +424,7 @@ proposal: {
     proposal: {
       hero: {
         title: "{name}, start getting real appointments with your new website",
-        subtitle: "We showed you your test website. Now choose the plan that best fits your business and we'll take care of the rest.",
+        subtitle: "We showed you your test website (100% customizable with your brand colors). Now choose the plan that best fits your business and we'll take care of the rest.",
         trust: "Designed for local small businesses that want results without fighting with technology.",
         cta: "Choose my plan"
       },
@@ -510,6 +514,10 @@ proposal: {
       faq: {
         title: "Frequently Asked Questions",
         items: [
+          {
+            q: "Can I change the colors or the style of the page?",
+            a: "Absolutely! Your page is 100% customizable. Once you choose your plan, we will adapt the colors, typography, and overall style to perfectly match your business's logo and brand identity."
+          },
           {
             q: "What's the difference between each plan?",
             a: "Plain = just the page, no domain/hosting. Web Presence = web + domain/hosting + minor changes. Web + Appointments = the above + online booking system. Growth = Web + Appointments + blog and recurring content."
